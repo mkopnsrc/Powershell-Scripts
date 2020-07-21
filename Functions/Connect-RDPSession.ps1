@@ -19,9 +19,9 @@
             $Session=($Sessions | Where-Object { $_.USERNAME -like "*$UserName*" })
             if (($Session.ID.Count -eq 1) -and ($Session.ID.GetType().Name -eq 'String')) {
                 mstsc /V:$($ComputerName) /shadow:$($Session.ID) /Control
-                Remove-Variable $Session -ErrorAction SilentlyContinue -Verbose $false;
+                Remove-Variable $Session -ErrorAction SilentlyContinue
             }else { Write-Error "Session doesn't exist" }
         }else { Write-Error "Username must be provided due to multiple logged on sessions found on $ComputerName." }
     }
-    Remove-Variable $Sessions -ErrorAction SilentlyContinue -Verbose $false;    
+    Remove-Variable $Sessions -ErrorAction SilentlyContinue
 }
