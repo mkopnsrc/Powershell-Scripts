@@ -51,3 +51,8 @@ Connect-RDPSession Computer_Name OR IP_Address
 Connect-RDPSession -ComputerName Computer_Name OR IP_Address
 Connect-RDPSession -ComputerName Computer_Name OR IP_Address -UserName Logged_on_Username
 ```
+### Get-DisabledGpo.ps1
+
+### Invoke-WakeOnLan.ps1
+
+### Get-NetAdapterNetbiosOptions.ps1
