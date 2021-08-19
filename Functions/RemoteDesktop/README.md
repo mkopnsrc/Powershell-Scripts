@@ -9,8 +9,8 @@ The RDP administrator can use the Shadow session mode to view and remotely manag
 ### Configuration Requirement for Remote Computers
   - Enable - Allow Remote Assistance connections to this computer in Windows System Properties / Remote Tab
   - Enable - Allow this computer to be controlled remotely in Advanced Option in Windows System Properties / Remote Tab
-  - Configure following Group Policy through AD or Locally
-  ![Remote Assistance GPO](images/gpo-remote-assistance.png)
+  - Configure following Computer based Group Policy through AD or Locally
+  ![Remote Assistance GPO](https://ghcdn.rawgit.org/mkopnsrc/Powershell-Scripts/master/images/gpo-remote-assistance.png)
 
 ### Examples
 ```powershell
