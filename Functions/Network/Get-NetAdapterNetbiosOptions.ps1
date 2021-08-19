@@ -1,8 +1,5 @@
-﻿Function Get-NetAdapterNetbiosOptions() {
+﻿Function Get-NetAdapterNetbiosOptions {
 <#
-.SYNOPSIS
-None
- 
 .DESCRIPTION
 None
  
@@ -16,8 +13,8 @@ None
 .OUTPUTS
 Interface Name                           Index TcpipNetbiosOptions
 --------------                           ----- -------------------
-Intel(R) Ethernet Connection (7) I219-LM 1     Disabled           
-Hyper-V Virtual Ethernet Adapter         2     Default
+Intel(R) Ethernet Connection I219         1     Disabled           
+Hyper-V Virtual Ethernet Adapter          2     Default
  
 .NOTES
 None
@@ -32,19 +29,20 @@ None
   
   $HT = @()
 
-  $Lines = @(wmic nicconfig get caption,index,TcpipNetbiosOptions).foreach({$(($_) -replace('\s{2,}',','))}) # REPLACES ALL OCCURENCES OF 2 OR MORE SPACES IN A ROW WITH A SINGLE COMMA
-  $Lines=$Lines.Where({$_ -ne ''}) #Remove empty spaces
+  # REPLACES ALL OCCURENCES OF 2 OR MORE SPACES IN A ROW WITH A SINGLE COMMA
+  $Lines = @(wmic nicconfig get caption,index,TcpipNetbiosOptions).foreach({$(($_) -replace('\s{2,}',','))})
+  $Lines = $Lines.Where({$_ -ne ''}) #Remove empty spaces
 
-  $header=$($Lines[0].split(',').trim())  # EXTRACTS THE FIRST ROW FOR ITS HEADER LINE
-  $header=$header.Where({$_ -ne ''})
-  $header[0]="Interface Name" # overide name; defualt-> Caption
+  $header = $($Lines[0].split(',').trim())  # EXTRACTS THE FIRST ROW FOR ITS HEADER LINE
+  $header = $header.Where({$_ -ne ''})
+  $header[0] ="Interface Name" # overide name; defualt-> Caption
 
   Write-Debug "Header: $header"
 
   for($i=1;$i -lt $($Lines.Count);$i++){ # NOTE $i=1 TO SKIP THE HEADER LINE
 
     $Res = "" | Select-Object $header # CREATES AN EMPTY PSCUSTOMOBJECT WITH PRE DEFINED FIELDS
-    $Line = $($Lines[$i].split(',')).foreach({ $_.trim().trim('>') }).Where({$_ -ne ''}) # SPLITS AND THEN TRIMS ANOMALIES THEN REMOVES EMPTY FIELDS
+    $Line = $($Lines[$i].split(',')).ForEach({ $_.trim().trim('>') }).Where({$_ -ne ''}) # SPLITS AND THEN TRIMS ANOMALIES THEN REMOVES EMPTY FIELDS
     Write-Debug "$Line"
 
     for($x=0;$x -lt $($Line.count);$x++){
@@ -62,10 +60,10 @@ None
   }
 
   Switch($Filter) {
-    Enabled { $HT | ? { ($_.TcpipNetbiosOptions -match 'Enabled|Default' ) } }
-    Disabled { $HT | ? { $_.TcpipNetbiosOptions -eq 'Disabled' } }
+    Enabled { $HT | Where-Object { ($_.TcpipNetbiosOptions -match 'Enabled|Default' ) } }
+    Disabled { $HT | Where-Object { $_.TcpipNetbiosOptions -eq 'Disabled' } }
     All { $HT }
-    Default { $HT | ? { $_.TcpipNetbiosOptions -ne $null } }
+    Default { $HT | Where-Object { $_.TcpipNetbiosOptions -ne $null } }
   }
   Remove-Variable HT
 }

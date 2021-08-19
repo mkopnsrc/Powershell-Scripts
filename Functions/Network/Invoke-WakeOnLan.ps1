@@ -70,6 +70,6 @@ Make sure the MAC addresses supplied don't contain "-" or ".".
   }
 
   ## Send magic packet to wake machine
-  Write "Sending magic packet to $MacAddress"
+  Write-Host "Sending magic packet to $MacAddress"
   Send-Packet $MacAddress
 }
