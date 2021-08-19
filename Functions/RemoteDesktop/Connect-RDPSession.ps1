@@ -1,28 +1,22 @@
 ﻿#Load this function only if current user is administrator or member of administrators group
-if(IsAdmin){
+if(IsMemberOf -GroupName 'itsupport-admins'){
   Function Connect-RDPSession() {
   <#
-  .SYNOPSIS
-  None
-   
   .DESCRIPTION
-  The RDP administrator can use the Shadow session mode to view and remotely manage active RDP session of any user. You can connect using this function command to remotely control user's session.
+    The RDP administrator can use the Shadow session mode to view and remotely manage active RDP session of any user. You can connect using this function command to remotely control user's session.
    
   .EXAMPLE
-  Connect-RDPSession Computer_Name OR IP_Address
-  Connect-RDPSession -ComputerName Computer_Name OR IP_Address
-  Connect-RDPSession -ComputerName Computer_Name OR IP_Address -UserName Logged_on_Username
+    Connect-RDPSession Computer_Name OR IP_Address
+    Connect-RDPSession -ComputerName Computer_Name OR IP_Address
+    Connect-RDPSession -ComputerName Computer_Name OR IP_Address -UserName Logged_on_Username
    
   .INPUTS
-  Remote Computer Name
-  Remote IP Address
-  Logged on Username [Optional - But required when it detects multiple users logged on]
+    Remote Computer Name
+    Remote IP Address
+    Logged on Username [Optional - But required when it detects multiple users logged on]
    
   .OUTPUTS
-  It connects to logged on user session of a remote pc by creating remote shadow connection
-   
-  .NOTES
-  None
+    It connects to logged on user session of a remote pc by creating remote shadow connection   
   #>
 
     [CmdletBinding()]
@@ -49,10 +43,10 @@ if(IsAdmin){
               if (($Session.ID.Count -eq 1) -and ($Session.ID.GetType().Name -eq 'String')) {
                   Write-Verbose "Connecting to $($ComputerName) with session id $($Session.ID)"
                   mstsc /V:$($ComputerName) /shadow:$($Session.ID) /Control
-                  Remove-Variable $Session -ErrorAction SilentlyContinue
+                  Remove-Variable Session -ErrorAction SilentlyContinue
               }else { Write-Error "Session doesn't exist" }
           }else { Write-Error "Username must be provided due to multiple logged on sessions found on $ComputerName." }
       }
-      Remove-Variable $Sessions -ErrorAction SilentlyContinue
+      Remove-Variable Sessions -ErrorAction SilentlyContinue
   }
 }
