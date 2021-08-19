@@ -1,5 +1,5 @@
 # PS Function Name List
-  - Get-QueryUser
+  - Get-QueryUser #Requires Domain Admins User
 
 
 ### Connect-RDPSession.ps1

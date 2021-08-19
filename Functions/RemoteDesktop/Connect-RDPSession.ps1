@@ -1,5 +1,5 @@
 ﻿#Load this function only if current user is administrator or member of administrators group
-if(IsMemberOf -GroupName 'itsupport-admins'){
+if(IsMemberOf -GroupName 'Domain Admins'){
   Function Connect-RDPSession() {
   <#
   .DESCRIPTION

@@ -1,5 +1,5 @@
 #Load this function only if current user is administrator or member of administrators group
-if(IsLocalAdmin){
+if(IsMemberOf -GroupName 'Domain Admins'){
   Function Get-QueryUser() {
   <#
   .SYNOPSIS
