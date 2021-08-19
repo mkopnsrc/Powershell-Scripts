@@ -1,17 +1,18 @@
-# PS Function Name List
-  - Get-QueryUser #Requires Domain Admins User
+# Windows Logon Functions List
+*All of the following functions requires Domain Admins user to be able to call the functions.*
+  - [Get-QueryUser](#Get-QueryUser)
 
 
-### Get-QueryUser
+## Get-QueryUser
 
 Displays information about user sessions on Remote Desktop Host server. You can use this function and command 'Get-QueryUser' to find out if a specific user session or to get list of users session that are logged on to a specific Remote Desktop Session Host server or workstation. This scripts requires elevated admin access to be able to execute.
 
-#### Examples
+### Examples
 ```powershell
  Get-QueryUser Computer_Name OR IP_Address
  Get-QueryUser -ComputerName Computer_Name OR IP_Address -Json
 ```
-#### Output
+### Output
 ```powershell
 PS C:\Users\MK> Get-QueryUser
 

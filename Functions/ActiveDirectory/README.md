@@ -1,6 +1,6 @@
 # Active Directory Functions List
 *All of the following functions requires Domain Admins user to be able to call the functions.*
-  - [Get-EmptyGroup] (#Get-EmptyGroup)
+  - [Get-EmptyGroup](#get-emptygroup)
 
 
 ## Get-EmptyGroup
