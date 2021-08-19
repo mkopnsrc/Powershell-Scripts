@@ -1,5 +1,5 @@
 #Load this function only if current user is administrator or member of administrators group
-if(IsAdmin){
+if(IsLocalAdmin){
   Function Get-QueryUser() {
   <#
   .SYNOPSIS
@@ -25,7 +25,6 @@ if(IsAdmin){
   None
   #>
 
-  #Requires -RunAsAdministrator
     param
     (
       [Parameter(Mandatory=$false, HelpMessage="Computer Name or IP Address of the destination")] [string] $ComputerName,
